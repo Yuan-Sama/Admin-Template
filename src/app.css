@@ -1,3 +1,14 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer base {
+	a {
+		color: #4154f1;
+		text-decoration: none;
+	}
+	body {
+		color: #444444;
+		font-family: 'Open Sans', sans-serif;
+	}
+}
