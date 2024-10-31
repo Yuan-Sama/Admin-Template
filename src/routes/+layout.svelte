@@ -27,7 +27,18 @@
 	/**
 	 * @type {import("svelte").SvelteComponent<{ class?: string; collapseAtStart?: boolean; children: import("svelte").Snippet; }, any, any> & { show: () => void; hide: () => void; showing: () => boolean; } & { $$bindings: ""; }}
 	 */
-	let componentDropDownMenu;
+	let componentsMenuElement;
+
+	const FormsMenu = [
+		{ link: '/forms/elements', title: 'Elements' },
+		{ link: '/forms/layouts', title: 'Layouts' },
+		{ link: '/forms/editors', title: 'Editors' },
+		{ link: '/forms/validation', title: 'Validation' }
+	];
+	/**
+	 * @type {import("svelte").SvelteComponent<{ class?: string; collapseAtStart?: boolean; children: import("svelte").Snippet; }, any, any> & { show: () => void; hide: () => void; showing: () => boolean; } & { $$bindings: ""; }}
+	 */
+	let formsMenuElement;
 </script>
 
 <svelte:head>
@@ -301,16 +312,16 @@
 
 		<li class="mb-[5px]">
 			<button
-				class="collapsed flex w-full items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				class="flex w-full items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
 				onclick={() =>
-					componentDropDownMenu.showing()
-						? componentDropDownMenu.hide()
-						: componentDropDownMenu.show()}
+					componentsMenuElement.showing()
+						? componentsMenuElement.hide()
+						: componentsMenuElement.show()}
 			>
 				<i class="bi bi-menu-button-wide mr-[10px] text-[16px] text-[#4154f1]"></i>
-				<span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
+				<span>Components</span><i class="bi bi-chevron-down ml-auto"></i>
 			</button>
-			<DropdownMenu bind:this={componentDropDownMenu} collapseAtStart={true}>
+			<DropdownMenu bind:this={componentsMenuElement} collapseAtStart={true}>
 				{#each ComponentsMenu as menu}
 					<li>
 						<a
@@ -327,43 +338,33 @@
 		<!-- End Components Nav -->
 
 		<li class="mb-[5px]">
-			<a
-				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				data-bs-target="#forms-nav"
-				data-bs-toggle="collapse"
-				href={'#'}
+			<button
+				class="flex w-full items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				onclick={() =>
+					formsMenuElement.showing() ? formsMenuElement.hide() : formsMenuElement.show()}
 			>
-				<i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"
-				></i>
-			</a>
-			<ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-				<li>
-					<a href="forms-elements.html">
-						<i class="bi bi-circle"></i><span>Form Elements</span>
-					</a>
-				</li>
-				<li>
-					<a href="forms-layouts.html">
-						<i class="bi bi-circle"></i><span>Form Layouts</span>
-					</a>
-				</li>
-				<li>
-					<a href="forms-editors.html">
-						<i class="bi bi-circle"></i><span>Form Editors</span>
-					</a>
-				</li>
-				<li>
-					<a href="forms-validation.html">
-						<i class="bi bi-circle"></i><span>Form Validation</span>
-					</a>
-				</li>
-			</ul>
+				<i class="bi bi-journal-text mr-[10px] text-[16px] text-[#4154f1]"></i>
+				<span>Forms</span><i class="bi bi-chevron-down ml-auto"></i>
+			</button>
+			<DropdownMenu bind:this={formsMenuElement} collapseAtStart={true}>
+				{#each FormsMenu as menu}
+					<li>
+						<a
+							class="flex items-center py-[10px] pl-[40px] text-[14px] font-semibold text-[#012970]"
+							href={menu.link}
+							aria-label=" "
+						>
+							<i class="bi bi-circle mr-[8px] text-[6px] leading-[0]"></i><span>{menu.title}</span>
+						</a>
+					</li>
+				{/each}
+			</DropdownMenu>
 		</li>
 		<!-- End Forms Nav -->
 
 		<li class="mb-[5px]">
 			<a
-				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
 				data-bs-target="#tables-nav"
 				data-bs-toggle="collapse"
 				href={'#'}
@@ -389,7 +390,7 @@
 
 		<li class="mb-[5px]">
 			<a
-				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
 				data-bs-target="#charts-nav"
 				data-bs-toggle="collapse"
 				href={'#'}
@@ -418,7 +419,7 @@
 
 		<li class="mb-[5px]">
 			<a
-				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
 				data-bs-target="#icons-nav"
 				data-bs-toggle="collapse"
 				href={'#'}
@@ -449,10 +450,10 @@
 
 		<li class="mb-[5px]">
 			<a
-				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="users-profile.html"
+				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="/pages/users-profile"
 			>
-				<i class="bi bi-person"></i>
+				<i class="bi bi-person mr-[10px] text-[16px] text-[#4154f1]"></i>
 				<span>Profile</span>
 			</a>
 		</li>
@@ -460,10 +461,10 @@
 
 		<li class="mb-[5px]">
 			<a
-				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="pages-faq.html"
+				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="/pages/faq.html"
 			>
-				<i class="bi bi-question-circle"></i>
+				<i class="bi bi-question-circle mr-[10px] text-[16px] text-[#4154f1]"></i>
 				<span>F.A.Q</span>
 			</a>
 		</li>
@@ -471,10 +472,10 @@
 
 		<li class="mb-[5px]">
 			<a
-				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="pages-contact.html"
+				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="/pages/contact"
 			>
-				<i class="bi bi-envelope"></i>
+				<i class="bi bi-envelope mr-[10px] text-[16px] text-[#4154f1]"></i>
 				<span>Contact</span>
 			</a>
 		</li>
@@ -482,10 +483,10 @@
 
 		<li class="mb-[5px]">
 			<a
-				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="pages-register.html"
+				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="/pages/register"
 			>
-				<i class="bi bi-card-list"></i>
+				<i class="bi bi-card-list mr-[10px] text-[16px] text-[#4154f1]"></i>
 				<span>Register</span>
 			</a>
 		</li>
@@ -493,10 +494,10 @@
 
 		<li class="mb-[5px]">
 			<a
-				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="pages-login.html"
+				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="/pages/login"
 			>
-				<i class="bi bi-box-arrow-in-right"></i>
+				<i class="bi bi-box-arrow-in-right mr-[10px] text-[16px] text-[#4154f1]"></i>
 				<span>Login</span>
 			</a>
 		</li>
@@ -504,10 +505,10 @@
 
 		<li class="mb-[5px]">
 			<a
-				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="pages-error-404.html"
+				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="/pages/error-404"
 			>
-				<i class="bi bi-dash-circle"></i>
+				<i class="bi bi-dash-circle mr-[10px] text-[16px] text-[#4154f1]"></i>
 				<span>Error 404</span>
 			</a>
 		</li>
@@ -515,10 +516,10 @@
 
 		<li class="mb-[5px]">
 			<a
-				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="pages-blank.html"
+				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="/pages/blank"
 			>
-				<i class="bi bi-file-earmark"></i>
+				<i class="bi bi-file-earmark mr-[10px] text-[16px] text-[#4154f1]"></i>
 				<span>Blank</span>
 			</a>
 		</li>
