@@ -1,13 +1,33 @@
 <script>
-	import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
-	import '@fortawesome/fontawesome-free/css/solid.min.css';
-	import '@fortawesome/fontawesome-free/css/regular.min.css';
-	import '@fortawesome/fontawesome-free/css/brands.min.css';
+	import 'bootstrap-icons/font/bootstrap-icons.min.css';
 	import '../app.css';
 	import LogoImage from '$assets/logo.png';
 	import ProfileImage from '$assets/profile.jpg';
 	import Badge from '$components/Badge.svelte';
+	import DropdownMenu from '$components/DropdownMenu.svelte';
 	let { children } = $props();
+
+	const ComponentsMenu = [
+		{ link: '/components/alerts', title: 'Alerts' },
+		{ link: '/components/accordion', title: 'Accordion' },
+		{ link: '/components/badges', title: 'Badges' },
+		{ link: '/components/breadcrumbs', title: 'Breadcrumbs' },
+		{ link: '/components/buttons', title: 'Buttons' },
+		{ link: '/components/cards', title: 'Cards' },
+		{ link: '/components/carousel', title: 'Carousel' },
+		{ link: '/components/list-group', title: 'List group' },
+		{ link: '/components/modal', title: 'Modal' },
+		{ link: '/components/tabs', title: 'Tabs' },
+		{ link: '/components/pagination', title: 'Pagination' },
+		{ link: '/components/progress', title: 'Progress' },
+		{ link: '/components/progress', title: 'Progress' },
+		{ link: '/components/spinners', title: 'Spinners' },
+		{ link: '/components/tooltips', title: 'Tooltips' }
+	];
+	/**
+	 * @type {import("svelte").SvelteComponent<{ class?: string; collapseAtStart?: boolean; children: import("svelte").Snippet; }, any, any> & { show: () => void; hide: () => void; showing: () => boolean; } & { $$bindings: ""; }}
+	 */
+	let componentDropDownMenu;
 </script>
 
 <svelte:head>
@@ -25,7 +45,7 @@
 				>Admin Template</span
 			>
 		</a>
-		<i class="fa-solid fa-bars cursor-pointer pl-[10px] text-[32px] text-[#012970]"></i>
+		<i class="bi bi-list cursor-pointer pl-[10px] text-[32px] text-[#012970]"></i>
 	</div>
 	<!-- End Logo -->
 
@@ -39,7 +59,7 @@
 				title="Enter search keyword"
 			/>
 			<button class="-ml-[30px] text-[#012970]" type="submit" title="Search" aria-label="Search">
-				<i class="fa-solid fa-magnifying-glass"></i>
+				<i class="bi bi-search"></i>
 			</button>
 		</form>
 	</div>
@@ -47,8 +67,8 @@
 
 	<nav class="ml-auto">
 		<ul class="flex items-center">
-			<li class="nav-item block lg:hidden">
-				<button class="nav-link nav-icon search-bar-toggle" aria-label=" ">
+			<li class="mb-[5px] block lg:hidden">
+				<button class="nav-lik nav-icon search-bar-toggle" aria-label=" ">
 					<i class="bi bi-search"></i>
 				</button>
 			</li>
@@ -56,7 +76,7 @@
 
 			<li class="relative">
 				<button class="relative mr-[25px] text-2xl text-[#012970]">
-					<i class="fa-regular fa-bell"></i>
+					<i class="bi bi-bell"></i>
 					<Badge
 						class="absolute inset-[-5px_-6px_auto_auto] bg-[rgb(13,110,253)] px-[6px] py-[3px] font-normal"
 					>
@@ -134,7 +154,7 @@
 
 			<li class="relative">
 				<button class="relative mr-[25px] text-2xl text-[#012970]">
-					<i class="fa-regular fa-comment-dots"></i>
+					<i class="bi bi-chat-left-text"></i>
 					<Badge
 						class="absolute inset-[-5px_-6px_auto_auto] bg-[rgb(25,135,84)] px-[6px] py-[3px] font-normal"
 					>
@@ -205,7 +225,7 @@
 				<button class="flex items-center text-[#012970]" data-bs-toggle="dropdown">
 					<img src={ProfileImage} alt="Profile" class="max-h-[36px] rounded-[50%] align-middle" />
 					<span
-						class="after:content-empty hidden whitespace-nowrap pl-2 text-sm font-semibold after:ml-[.255em] after:inline-block after:border-x-[.3em] after:border-t-[.3em] after:border-solid after:border-[#012970] after:border-x-transparent after:align-[.255em] md:block"
+						class="hidden whitespace-nowrap pl-2 text-sm font-semibold after:ml-[.255em] after:inline-block after:border-x-[.3em] after:border-t-[.3em] after:border-solid after:border-[#012970] after:border-x-transparent after:align-[.255em] after:content-empty md:block"
 						>K. Anderson</span
 					>
 				</button><!-- End Profile Iamge Icon -->
@@ -268,103 +288,47 @@
 	class="fixed bottom-0 left-0 top-[60px] z-[1029] w-[300px] overflow-y-auto bg-white p-5 shadow-[0px_0px_20px_rgba(1,_41,_112,_0.1)] transition-all duration-300 [scrollbar-color:_#aab7cf_transparent] [scrollbar-width:thin]"
 >
 	<ul class="sidebar-nav" id="sidebar-nav">
-		<li class="nav-item">
-			<a class="nav-link" href="index.html">
-				<i class="bi bi-grid"></i>
+		<li class="mb-[5px]">
+			<a
+				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="/"
+			>
+				<i class="bi bi-grid mr-[10px] text-[16px] text-[#4154f1]"></i>
 				<span>Dashboard</span>
 			</a>
 		</li>
 		<!-- End Dashboard Nav -->
 
-		<li class="nav-item">
-			<a
-				class="nav-link collapsed"
-				data-bs-target="#components-nav"
-				data-bs-toggle="collapse"
-				href={'#'}
+		<li class="mb-[5px]">
+			<button
+				class="collapsed flex w-full items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				onclick={() =>
+					componentDropDownMenu.showing()
+						? componentDropDownMenu.hide()
+						: componentDropDownMenu.show()}
 			>
-				<i class="bi bi-menu-button-wide"></i><span>Components</span><i
-					class="bi bi-chevron-down ms-auto"
-				></i>
-			</a>
-			<ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-				<li>
-					<a href="components-alerts.html">
-						<i class="bi bi-circle"></i><span>Alerts</span>
-					</a>
-				</li>
-				<li>
-					<a href="components-accordion.html">
-						<i class="bi bi-circle"></i><span>Accordion</span>
-					</a>
-				</li>
-				<li>
-					<a href="components-badges.html">
-						<i class="bi bi-circle"></i><span>Badges</span>
-					</a>
-				</li>
-				<li>
-					<a href="components-breadcrumbs.html">
-						<i class="bi bi-circle"></i><span>Breadcrumbs</span>
-					</a>
-				</li>
-				<li>
-					<a href="components-buttons.html">
-						<i class="bi bi-circle"></i><span>Buttons</span>
-					</a>
-				</li>
-				<li>
-					<a href="components-cards.html">
-						<i class="bi bi-circle"></i><span>Cards</span>
-					</a>
-				</li>
-				<li>
-					<a href="components-carousel.html">
-						<i class="bi bi-circle"></i><span>Carousel</span>
-					</a>
-				</li>
-				<li>
-					<a href="components-list-group.html">
-						<i class="bi bi-circle"></i><span>List group</span>
-					</a>
-				</li>
-				<li>
-					<a href="components-modal.html">
-						<i class="bi bi-circle"></i><span>Modal</span>
-					</a>
-				</li>
-				<li>
-					<a href="components-tabs.html">
-						<i class="bi bi-circle"></i><span>Tabs</span>
-					</a>
-				</li>
-				<li>
-					<a href="components-pagination.html">
-						<i class="bi bi-circle"></i><span>Pagination</span>
-					</a>
-				</li>
-				<li>
-					<a href="components-progress.html">
-						<i class="bi bi-circle"></i><span>Progress</span>
-					</a>
-				</li>
-				<li>
-					<a href="components-spinners.html">
-						<i class="bi bi-circle"></i><span>Spinners</span>
-					</a>
-				</li>
-				<li>
-					<a href="components-tooltips.html">
-						<i class="bi bi-circle"></i><span>Tooltips</span>
-					</a>
-				</li>
-			</ul>
+				<i class="bi bi-menu-button-wide mr-[10px] text-[16px] text-[#4154f1]"></i>
+				<span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
+			</button>
+			<DropdownMenu bind:this={componentDropDownMenu} collapseAtStart={true}>
+				{#each ComponentsMenu as menu}
+					<li>
+						<a
+							class="flex items-center py-[10px] pl-[40px] text-[14px] font-semibold text-[#012970]"
+							href={menu.link}
+							aria-label=" "
+						>
+							<i class="bi bi-circle mr-[8px] text-[6px] leading-[0]"></i><span>{menu.title}</span>
+						</a>
+					</li>
+				{/each}
+			</DropdownMenu>
 		</li>
 		<!-- End Components Nav -->
 
-		<li class="nav-item">
+		<li class="mb-[5px]">
 			<a
-				class="nav-link collapsed"
+				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
 				data-bs-target="#forms-nav"
 				data-bs-toggle="collapse"
 				href={'#'}
@@ -397,9 +361,9 @@
 		</li>
 		<!-- End Forms Nav -->
 
-		<li class="nav-item">
+		<li class="mb-[5px]">
 			<a
-				class="nav-link collapsed"
+				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
 				data-bs-target="#tables-nav"
 				data-bs-toggle="collapse"
 				href={'#'}
@@ -423,9 +387,9 @@
 		</li>
 		<!-- End Tables Nav -->
 
-		<li class="nav-item">
+		<li class="mb-[5px]">
 			<a
-				class="nav-link collapsed"
+				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
 				data-bs-target="#charts-nav"
 				data-bs-toggle="collapse"
 				href={'#'}
@@ -452,9 +416,9 @@
 		</li>
 		<!-- End Charts Nav -->
 
-		<li class="nav-item">
+		<li class="mb-[5px]">
 			<a
-				class="nav-link collapsed"
+				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
 				data-bs-target="#icons-nav"
 				data-bs-toggle="collapse"
 				href={'#'}
@@ -483,56 +447,77 @@
 
 		<li class="nav-heading">Pages</li>
 
-		<li class="nav-item">
-			<a class="nav-link collapsed" href="users-profile.html">
+		<li class="mb-[5px]">
+			<a
+				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="users-profile.html"
+			>
 				<i class="bi bi-person"></i>
 				<span>Profile</span>
 			</a>
 		</li>
 		<!-- End Profile Page Nav -->
 
-		<li class="nav-item">
-			<a class="nav-link collapsed" href="pages-faq.html">
+		<li class="mb-[5px]">
+			<a
+				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="pages-faq.html"
+			>
 				<i class="bi bi-question-circle"></i>
 				<span>F.A.Q</span>
 			</a>
 		</li>
 		<!-- End F.A.Q Page Nav -->
 
-		<li class="nav-item">
-			<a class="nav-link collapsed" href="pages-contact.html">
+		<li class="mb-[5px]">
+			<a
+				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="pages-contact.html"
+			>
 				<i class="bi bi-envelope"></i>
 				<span>Contact</span>
 			</a>
 		</li>
 		<!-- End Contact Page Nav -->
 
-		<li class="nav-item">
-			<a class="nav-link collapsed" href="pages-register.html">
+		<li class="mb-[5px]">
+			<a
+				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="pages-register.html"
+			>
 				<i class="bi bi-card-list"></i>
 				<span>Register</span>
 			</a>
 		</li>
 		<!-- End Register Page Nav -->
 
-		<li class="nav-item">
-			<a class="nav-link collapsed" href="pages-login.html">
+		<li class="mb-[5px]">
+			<a
+				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="pages-login.html"
+			>
 				<i class="bi bi-box-arrow-in-right"></i>
 				<span>Login</span>
 			</a>
 		</li>
 		<!-- End Login Page Nav -->
 
-		<li class="nav-item">
-			<a class="nav-link collapsed" href="pages-error-404.html">
+		<li class="mb-[5px]">
+			<a
+				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="pages-error-404.html"
+			>
 				<i class="bi bi-dash-circle"></i>
 				<span>Error 404</span>
 			</a>
 		</li>
 		<!-- End Error 404 Page Nav -->
 
-		<li class="nav-item">
-			<a class="nav-link collapsed" href="pages-blank.html">
+		<li class="mb-[5px]">
+			<a
+				class="collapsed flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
+				href="pages-blank.html"
+			>
 				<i class="bi bi-file-earmark"></i>
 				<span>Blank</span>
 			</a>
@@ -558,5 +543,5 @@
 	class="fixed bottom-[15px] right-[15px] z-[99999] flex size-[40px] items-center justify-center rounded-[4px] bg-[#4154f1] transition-all duration-[.4s]"
 	aria-label=" "
 >
-	<i class="fa-solid fa-arrow-up text-sm leading-[0] text-white"></i>
+	<i class="bi bi-arrow-up-short text-sm leading-[0] text-white"></i>
 </button>
