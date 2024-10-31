@@ -4,28 +4,33 @@
 	import '@fortawesome/fontawesome-free/css/regular.min.css';
 	import '@fortawesome/fontawesome-free/css/brands.min.css';
 	import '../app.css';
-	import logo from '$assets/logo.png';
+	import LogoImage from '$assets/logo.png';
+	import ProfileImage from '$assets/profile.jpg';
+	import Badge from '$components/Badge.svelte';
 	let { children } = $props();
 </script>
+
+<svelte:head>
+	<title>Admin Tailwindcss Template</title>
+</svelte:head>
 
 <header
 	class="fixed left-0 right-0 top-0 z-[1030] flex h-[60px] items-center bg-white pl-5 shadow-[0px_2px_20px_rgba(1,41,112,0.1)]"
 >
 	<div class="flex items-center justify-between">
 		<a href="/" class="flex items-center xl:w-72">
-			<img class="mr-[6px] max-h-[26px]" src={logo} alt="" />
+			<img class="mr-[6px] max-h-[26px]" src={LogoImage} alt="Logo" />
 			<span
 				class="hidden font-['Nunito',_sans-serif] text-[26px] font-bold leading-[1] text-[#012970] lg:block"
-				>NiceAdmin</span
+				>Admin Template</span
 			>
 		</a>
-		<i class="fa-solid fa-bars"></i>
-		<i class="bi bi-list toggle-sidebar-btn"></i>
+		<i class="fa-solid fa-bars cursor-pointer pl-[10px] text-[32px] text-[#012970]"></i>
 	</div>
 	<!-- End Logo -->
 
 	<div class="min-w-[360px] px-5">
-		<form class="flex w-full items-center" method="POST" action="#">
+		<form class="flex w-full items-center" action="#">
 			<input
 				class="w-full rounded-[3px] border border-solid border-[rgba(1,_41,_112,_0.2)] py-[7px] pl-[8px] pr-[38px] text-sm text-[#012970] duration-300 focus:border-[rgba(1,_41,_112,_0.3)] focus:shadow-[0_0_10px_0_rgba(1,_41,_112,_0.15)] focus:outline-0"
 				type="text"
@@ -40,25 +45,29 @@
 	</div>
 	<!-- End Search Bar -->
 
-	<nav class="header-nav ms-auto">
+	<nav class="ml-auto">
 		<ul class="flex items-center">
-			<li class="nav-item d-block d-lg-none">
-				<a class="nav-link nav-icon search-bar-toggle" href={'#'} aria-label="">
+			<li class="nav-item block lg:hidden">
+				<button class="nav-link nav-icon search-bar-toggle" aria-label=" ">
 					<i class="bi bi-search"></i>
-				</a>
+				</button>
 			</li>
 			<!-- End Search Icon-->
 
-			<li class="nav-item dropdown">
-				<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-					<i class="bi bi-bell"></i>
-					<span class="badge bg-primary badge-number">4</span>
-				</a><!-- End Notification Icon -->
+			<li class="relative">
+				<button class="relative mr-[25px] text-2xl text-[#012970]">
+					<i class="fa-regular fa-bell"></i>
+					<Badge
+						class="absolute inset-[-5px_-6px_auto_auto] bg-[rgb(13,110,253)] px-[6px] py-[3px] font-normal"
+					>
+						4
+					</Badge>
+				</button><!-- End Notification Icon -->
 
-				<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+				<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications hidden">
 					<li class="dropdown-header">
 						You have 4 new notifications
-						<a href="#"><span class="badge rounded-pill bg-primary ms-2 p-2">View all</span></a>
+						<a href={'#'}><span class="badge rounded-pill bg-primary ms-2 p-2">View all</span></a>
 					</li>
 					<li>
 						<hr class="dropdown-divider" />
@@ -116,30 +125,34 @@
 						<hr class="dropdown-divider" />
 					</li>
 					<li class="dropdown-footer">
-						<a href="#">Show all notifications</a>
+						<a href={'#'}>Show all notifications</a>
 					</li>
 				</ul>
 				<!-- End Notification Dropdown Items -->
 			</li>
 			<!-- End Notification Nav -->
 
-			<li class="nav-item dropdown">
-				<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-					<i class="bi bi-chat-left-text"></i>
-					<span class="badge bg-success badge-number">3</span>
-				</a><!-- End Messages Icon -->
+			<li class="relative">
+				<button class="relative mr-[25px] text-2xl text-[#012970]">
+					<i class="fa-regular fa-comment-dots"></i>
+					<Badge
+						class="absolute inset-[-5px_-6px_auto_auto] bg-[rgb(25,135,84)] px-[6px] py-[3px] font-normal"
+					>
+						3
+					</Badge>
+				</button><!-- End Messages Icon -->
 
-				<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+				<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages hidden">
 					<li class="dropdown-header">
 						You have 3 new messages
-						<a href="#"><span class="badge rounded-pill bg-primary ms-2 p-2">View all</span></a>
+						<a href={'#'}><span class="badge rounded-pill bg-primary ms-2 p-2">View all</span></a>
 					</li>
 					<li>
 						<hr class="dropdown-divider" />
 					</li>
 
 					<li class="message-item">
-						<a href="#">
+						<a href={'#'}>
 							<img src="assets/img/messages-1.jpg" alt="" class="rounded-circle" />
 							<div>
 								<h4>Maria Hudson</h4>
@@ -153,7 +166,7 @@
 					</li>
 
 					<li class="message-item">
-						<a href="#">
+						<a href={'#'}>
 							<img src="assets/img/messages-2.jpg" alt="" class="rounded-circle" />
 							<div>
 								<h4>Anna Nelson</h4>
@@ -167,7 +180,7 @@
 					</li>
 
 					<li class="message-item">
-						<a href="#">
+						<a href={'#'}>
 							<img src="assets/img/messages-3.jpg" alt="" class="rounded-circle" />
 							<div>
 								<h4>David Muldon</h4>
@@ -181,20 +194,23 @@
 					</li>
 
 					<li class="dropdown-footer">
-						<a href="#">Show all messages</a>
+						<a href={'#'}>Show all messages</a>
 					</li>
 				</ul>
 				<!-- End Messages Dropdown Items -->
 			</li>
 			<!-- End Messages Nav -->
 
-			<li class="nav-item dropdown pe-3">
-				<a class="nav-link nav-profile flex items-center pe-0" href="#" data-bs-toggle="dropdown">
-					<img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle" />
-					<span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-				</a><!-- End Profile Iamge Icon -->
+			<li class="relative pr-4">
+				<button class="flex items-center text-[#012970]" data-bs-toggle="dropdown">
+					<img src={ProfileImage} alt="Profile" class="max-h-[36px] rounded-[50%] align-middle" />
+					<span
+						class="after:content-empty hidden whitespace-nowrap pl-2 text-sm font-semibold after:ml-[.255em] after:inline-block after:border-x-[.3em] after:border-t-[.3em] after:border-solid after:border-[#012970] after:border-x-transparent after:align-[.255em] md:block"
+						>K. Anderson</span
+					>
+				</button><!-- End Profile Iamge Icon -->
 
-				<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+				<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile hidden">
 					<li class="dropdown-header">
 						<h6>Kevin Anderson</h6>
 						<span>Web Designer</span>
@@ -234,7 +250,7 @@
 					</li>
 
 					<li>
-						<a class="dropdown-item flex items-center" href="#">
+						<a class="dropdown-item flex items-center" href={'#'}>
 							<i class="bi bi-box-arrow-right"></i>
 							<span>Sign Out</span>
 						</a>
@@ -248,7 +264,9 @@
 	<!-- End Icons Navigation -->
 </header>
 
-<aside id="sidebar" class="sidebar">
+<aside
+	class="fixed bottom-0 left-0 top-[60px] z-[1029] w-[300px] overflow-y-auto bg-white p-5 shadow-[0px_0px_20px_rgba(1,_41,_112,_0.1)] transition-all duration-300 [scrollbar-color:_#aab7cf_transparent] [scrollbar-width:thin]"
+>
 	<ul class="sidebar-nav" id="sidebar-nav">
 		<li class="nav-item">
 			<a class="nav-link" href="index.html">
@@ -263,7 +281,7 @@
 				class="nav-link collapsed"
 				data-bs-target="#components-nav"
 				data-bs-toggle="collapse"
-				href="#"
+				href={'#'}
 			>
 				<i class="bi bi-menu-button-wide"></i><span>Components</span><i
 					class="bi bi-chevron-down ms-auto"
@@ -345,7 +363,12 @@
 		<!-- End Components Nav -->
 
 		<li class="nav-item">
-			<a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+			<a
+				class="nav-link collapsed"
+				data-bs-target="#forms-nav"
+				data-bs-toggle="collapse"
+				href={'#'}
+			>
 				<i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"
 				></i>
 			</a>
@@ -375,7 +398,12 @@
 		<!-- End Forms Nav -->
 
 		<li class="nav-item">
-			<a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+			<a
+				class="nav-link collapsed"
+				data-bs-target="#tables-nav"
+				data-bs-toggle="collapse"
+				href={'#'}
+			>
 				<i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i
 					class="bi bi-chevron-down ms-auto"
 				></i>
@@ -396,7 +424,12 @@
 		<!-- End Tables Nav -->
 
 		<li class="nav-item">
-			<a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+			<a
+				class="nav-link collapsed"
+				data-bs-target="#charts-nav"
+				data-bs-toggle="collapse"
+				href={'#'}
+			>
 				<i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
 			</a>
 			<ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
@@ -420,7 +453,12 @@
 		<!-- End Charts Nav -->
 
 		<li class="nav-item">
-			<a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+			<a
+				class="nav-link collapsed"
+				data-bs-target="#icons-nav"
+				data-bs-toggle="collapse"
+				href={'#'}
+			>
 				<i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
 			</a>
 			<ul id="icons-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
@@ -503,21 +541,22 @@
 	</ul>
 </aside>
 
-{@render children()}
+<main id="main" class="mt-[60px] px-[30px] py-5 lg:ml-[300px]">
+	{@render children()}
+</main>
 
-<footer class="border-t border-solid border-[#cddfff] py-5">
-	<div class="copyright">
-		&copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+<footer class="border-t border-solid border-[#cddfff] py-5 text-sm lg:ml-[300px]">
+	<div class="text-center text-[#012970]">
+		&copy; Copyright <strong><span>Admin Template</span></strong>. All Rights Reserved
 	</div>
-	<div class="credits">
-		<!-- All the links in the footer should remain intact. -->
-		<!-- You can delete the links only if you purchased the pro version. -->
-		<!-- Licensing information: https://bootstrapmade.com/license/ -->
-		<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+	<div class="pt-[5px] text-center text-[13px] text-[#012970]">
 		Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
 	</div>
 </footer>
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
-	<i class="bi bi-arrow-up-short"></i>
-</a>
+<button
+	class="fixed bottom-[15px] right-[15px] z-[99999] flex size-[40px] items-center justify-center rounded-[4px] bg-[#4154f1] transition-all duration-[.4s]"
+	aria-label=" "
+>
+	<i class="fa-solid fa-arrow-up text-sm leading-[0] text-white"></i>
+</button>
