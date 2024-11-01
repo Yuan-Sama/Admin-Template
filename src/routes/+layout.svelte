@@ -7,38 +7,73 @@
 	import DropdownMenu from '$components/DropdownMenu.svelte';
 	let { children } = $props();
 
-	const ComponentsMenu = [
-		{ link: '/components/alerts', title: 'Alerts' },
-		{ link: '/components/accordion', title: 'Accordion' },
-		{ link: '/components/badges', title: 'Badges' },
-		{ link: '/components/breadcrumbs', title: 'Breadcrumbs' },
-		{ link: '/components/buttons', title: 'Buttons' },
-		{ link: '/components/cards', title: 'Cards' },
-		{ link: '/components/carousel', title: 'Carousel' },
-		{ link: '/components/list-group', title: 'List group' },
-		{ link: '/components/modal', title: 'Modal' },
-		{ link: '/components/tabs', title: 'Tabs' },
-		{ link: '/components/pagination', title: 'Pagination' },
-		{ link: '/components/progress', title: 'Progress' },
-		{ link: '/components/progress', title: 'Progress' },
-		{ link: '/components/spinners', title: 'Spinners' },
-		{ link: '/components/tooltips', title: 'Tooltips' }
-	];
-	/**
-	 * @type {import("svelte").SvelteComponent<{ class?: string; collapseAtStart?: boolean; children: import("svelte").Snippet; }, any, any> & { show: () => void; hide: () => void; showing: () => boolean; } & { $$bindings: ""; }}
-	 */
-	let componentsMenuElement;
-
-	const FormsMenu = [
-		{ link: '/forms/elements', title: 'Elements' },
-		{ link: '/forms/layouts', title: 'Layouts' },
-		{ link: '/forms/editors', title: 'Editors' },
-		{ link: '/forms/validation', title: 'Validation' }
-	];
-	/**
-	 * @type {import("svelte").SvelteComponent<{ class?: string; collapseAtStart?: boolean; children: import("svelte").Snippet; }, any, any> & { show: () => void; hide: () => void; showing: () => boolean; } & { $$bindings: ""; }}
-	 */
-	let formsMenuElement;
+	const SidebarMenu = $state([
+		{ link: '/', title: 'Dashboard', biIconClass: 'bi bi-grid' },
+		{
+			title: 'Components',
+			biIconClass: 'bi bi-menu-button-wide',
+			/** @type {import("svelte").SvelteComponent<{ class?: string; collapseAtStart?: boolean; children: import("svelte").Snippet; }, any, any> & { show: () => void; hide: () => void; showing: () => boolean; } & { $$bindings: ""; } | undefined} */
+			refThis: undefined,
+			subMenu: [
+				{ link: '/components/alerts', title: 'Alerts' },
+				{ link: '/components/accordion', title: 'Accordion' },
+				{ link: '/components/badges', title: 'Badges' },
+				{ link: '/components/breadcrumbs', title: 'Breadcrumbs' },
+				{ link: '/components/buttons', title: 'Buttons' },
+				{ link: '/components/cards', title: 'Cards' },
+				{ link: '/components/carousel', title: 'Carousel' },
+				{ link: '/components/list-group', title: 'List group' },
+				{ link: '/components/modal', title: 'Modal' },
+				{ link: '/components/tabs', title: 'Tabs' },
+				{ link: '/components/pagination', title: 'Pagination' },
+				{ link: '/components/progress', title: 'Progress' },
+				{ link: '/components/progress', title: 'Progress' },
+				{ link: '/components/spinners', title: 'Spinners' },
+				{ link: '/components/tooltips', title: 'Tooltips' }
+			]
+		},
+		{
+			title: 'Forms',
+			biIconClass: 'bi bi-journal-text',
+			/** @type {import("svelte").SvelteComponent<{ class?: string; collapseAtStart?: boolean; children: import("svelte").Snippet; }, any, any> & { show: () => void; hide: () => void; showing: () => boolean; } & { $$bindings: ""; } | undefined} */
+			refThis: undefined,
+			subMenu: [
+				{ link: '/forms/elements', title: 'Elements' },
+				{ link: '/forms/layouts', title: 'Layouts' },
+				{ link: '/forms/editors', title: 'Editors' },
+				{ link: '/forms/validation', title: 'Validation' }
+			]
+		},
+		{
+			title: 'Tables',
+			biIconClass: 'bi bi-layout-text-window-reverse',
+			/** @type {import("svelte").SvelteComponent<{ class?: string; collapseAtStart?: boolean; children: import("svelte").Snippet; }, any, any> & { show: () => void; hide: () => void; showing: () => boolean; } & { $$bindings: ""; } | undefined} */
+			refThis: undefined,
+			subMenu: [
+				{ link: '/tables/general', title: 'General Tables' },
+				{ link: '/tables/data', title: 'Data Tables' }
+			]
+		},
+		{
+			title: 'Charts',
+			biIconClass: 'bi bi-bar-chart',
+			/** @type {import("svelte").SvelteComponent<{ class?: string; collapseAtStart?: boolean; children: import("svelte").Snippet; }, any, any> & { show: () => void; hide: () => void; showing: () => boolean; } & { $$bindings: ""; } | undefined} */
+			refThis: undefined,
+			subMenu: [
+				{ link: '/charts/chartjs', title: 'Chart.js' },
+				{ link: '/charts/apexcharts', title: 'ApexCharts' },
+				{ link: '/charts/echarts', title: 'ECharts' }
+			]
+		},
+		{ title: 'Pages' },
+		{ link: '/pages/users-profile', title: 'Profile', biIconClass: 'bi bi-person' },
+		{ link: '/pages/faq', title: 'F.A.Q', biIconClass: 'bi bi-question-circle' },
+		{ link: '/pages/contact', title: 'Contact', biIconClass: 'bi bi-envelope' },
+		{ link: '/pages/register', title: 'Register', biIconClass: 'bi bi-card-list' },
+		{ link: '/pages/login', title: 'Login', biIconClass: 'bi bi-box-arrow-in-right' },
+		{ link: '/pages/error-404', title: 'Error 404', biIconClass: 'bi bi-dash-circle' },
+		{ link: '/pages/blank', title: 'Blank', biIconClass: 'bi bi-file-earmark' }
+	]);
 </script>
 
 <svelte:head>
@@ -299,231 +334,52 @@
 	class="fixed bottom-0 left-0 top-[60px] z-[1029] w-[300px] overflow-y-auto bg-white p-5 shadow-[0px_0px_20px_rgba(1,_41,_112,_0.1)] transition-all duration-300 [scrollbar-color:_#aab7cf_transparent] [scrollbar-width:thin]"
 >
 	<ul class="sidebar-nav" id="sidebar-nav">
-		<li class="mb-[5px]">
-			<a
-				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="/"
-			>
-				<i class="bi bi-grid mr-[10px] text-[16px] text-[#4154f1]"></i>
-				<span>Dashboard</span>
-			</a>
-		</li>
-		<!-- End Dashboard Nav -->
-
-		<li class="mb-[5px]">
-			<button
-				class="flex w-full items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				onclick={() =>
-					componentsMenuElement.showing()
-						? componentsMenuElement.hide()
-						: componentsMenuElement.show()}
-			>
-				<i class="bi bi-menu-button-wide mr-[10px] text-[16px] text-[#4154f1]"></i>
-				<span>Components</span><i class="bi bi-chevron-down ml-auto"></i>
-			</button>
-			<DropdownMenu bind:this={componentsMenuElement} collapseAtStart={true}>
-				{#each ComponentsMenu as menu}
-					<li>
-						<a
-							class="flex items-center py-[10px] pl-[40px] text-[14px] font-semibold text-[#012970]"
-							href={menu.link}
-							aria-label=" "
-						>
-							<i class="bi bi-circle mr-[8px] text-[6px] leading-[0]"></i><span>{menu.title}</span>
-						</a>
-					</li>
-				{/each}
-			</DropdownMenu>
-		</li>
-		<!-- End Components Nav -->
-
-		<li class="mb-[5px]">
-			<button
-				class="flex w-full items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				onclick={() =>
-					formsMenuElement.showing() ? formsMenuElement.hide() : formsMenuElement.show()}
-			>
-				<i class="bi bi-journal-text mr-[10px] text-[16px] text-[#4154f1]"></i>
-				<span>Forms</span><i class="bi bi-chevron-down ml-auto"></i>
-			</button>
-			<DropdownMenu bind:this={formsMenuElement} collapseAtStart={true}>
-				{#each FormsMenu as menu}
-					<li>
-						<a
-							class="flex items-center py-[10px] pl-[40px] text-[14px] font-semibold text-[#012970]"
-							href={menu.link}
-							aria-label=" "
-						>
-							<i class="bi bi-circle mr-[8px] text-[6px] leading-[0]"></i><span>{menu.title}</span>
-						</a>
-					</li>
-				{/each}
-			</DropdownMenu>
-		</li>
-		<!-- End Forms Nav -->
-
-		<li class="mb-[5px]">
-			<a
-				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				data-bs-target="#tables-nav"
-				data-bs-toggle="collapse"
-				href={'#'}
-			>
-				<i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i
-					class="bi bi-chevron-down ms-auto"
-				></i>
-			</a>
-			<ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-				<li>
-					<a href="tables-general.html">
-						<i class="bi bi-circle"></i><span>General Tables</span>
+		{#each SidebarMenu as { link, subMenu, biIconClass, title }, index}
+			{#if !biIconClass}
+				<li class="mb-[5px] ml-[15px] mt-[10px] text-[11px] font-semibold uppercase text-[#899bbd]">
+					{title}
+				</li>
+			{:else if !subMenu && link}
+				<li class="mb-[5px]">
+					<a
+						class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#012970] hover:bg-[#f6f9ff] hover:text-[#4154f1]"
+						href={link}
+						aria-label=" "
+					>
+						<i class="{biIconClass} mr-[10px] text-[16px]"></i>
+						<span>{title}</span>
 					</a>
 				</li>
-				<li>
-					<a href="tables-data.html">
-						<i class="bi bi-circle"></i><span>Data Tables</span>
-					</a>
+			{:else if subMenu}
+				<li class="mb-[5px]">
+					<button
+						class="flex w-full items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#012970] hover:bg-[#f6f9ff] hover:text-[#4154f1]"
+						onclick={() =>
+							SidebarMenu[index].refThis?.showing()
+								? SidebarMenu[index].refThis?.hide()
+								: SidebarMenu[index].refThis?.show()}
+					>
+						<i class="{biIconClass} mr-[10px] text-[16px]"></i>
+						<span>{title}</span><i class="bi bi-chevron-down ml-auto"></i>
+					</button>
+					<DropdownMenu bind:this={SidebarMenu[index].refThis} collapseAtStart={true}>
+						{#each subMenu as subMenuItem}
+							<li>
+								<a
+									class="flex items-center py-[10px] pl-[40px] text-[14px] font-semibold text-[#012970]"
+									href={subMenuItem.link}
+									aria-label=" "
+								>
+									<i class="bi bi-circle mr-[8px] text-[6px] leading-[0]"></i><span
+										>{subMenuItem.title}</span
+									>
+								</a>
+							</li>
+						{/each}
+					</DropdownMenu>
 				</li>
-			</ul>
-		</li>
-		<!-- End Tables Nav -->
-
-		<li class="mb-[5px]">
-			<a
-				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				data-bs-target="#charts-nav"
-				data-bs-toggle="collapse"
-				href={'#'}
-			>
-				<i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
-			</a>
-			<ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-				<li>
-					<a href="charts-chartjs.html">
-						<i class="bi bi-circle"></i><span>Chart.js</span>
-					</a>
-				</li>
-				<li>
-					<a href="charts-apexcharts.html">
-						<i class="bi bi-circle"></i><span>ApexCharts</span>
-					</a>
-				</li>
-				<li>
-					<a href="charts-echarts.html">
-						<i class="bi bi-circle"></i><span>ECharts</span>
-					</a>
-				</li>
-			</ul>
-		</li>
-		<!-- End Charts Nav -->
-
-		<li class="mb-[5px]">
-			<a
-				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				data-bs-target="#icons-nav"
-				data-bs-toggle="collapse"
-				href={'#'}
-			>
-				<i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
-			</a>
-			<ul id="icons-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-				<li>
-					<a href="icons-bootstrap.html">
-						<i class="bi bi-circle"></i><span>Bootstrap Icons</span>
-					</a>
-				</li>
-				<li>
-					<a href="icons-remix.html">
-						<i class="bi bi-circle"></i><span>Remix Icons</span>
-					</a>
-				</li>
-				<li>
-					<a href="icons-boxicons.html">
-						<i class="bi bi-circle"></i><span>Boxicons</span>
-					</a>
-				</li>
-			</ul>
-		</li>
-		<!-- End Icons Nav -->
-
-		<li class="nav-heading">Pages</li>
-
-		<li class="mb-[5px]">
-			<a
-				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="/pages/users-profile"
-			>
-				<i class="bi bi-person mr-[10px] text-[16px] text-[#4154f1]"></i>
-				<span>Profile</span>
-			</a>
-		</li>
-		<!-- End Profile Page Nav -->
-
-		<li class="mb-[5px]">
-			<a
-				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="/pages/faq.html"
-			>
-				<i class="bi bi-question-circle mr-[10px] text-[16px] text-[#4154f1]"></i>
-				<span>F.A.Q</span>
-			</a>
-		</li>
-		<!-- End F.A.Q Page Nav -->
-
-		<li class="mb-[5px]">
-			<a
-				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="/pages/contact"
-			>
-				<i class="bi bi-envelope mr-[10px] text-[16px] text-[#4154f1]"></i>
-				<span>Contact</span>
-			</a>
-		</li>
-		<!-- End Contact Page Nav -->
-
-		<li class="mb-[5px]">
-			<a
-				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="/pages/register"
-			>
-				<i class="bi bi-card-list mr-[10px] text-[16px] text-[#4154f1]"></i>
-				<span>Register</span>
-			</a>
-		</li>
-		<!-- End Register Page Nav -->
-
-		<li class="mb-[5px]">
-			<a
-				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="/pages/login"
-			>
-				<i class="bi bi-box-arrow-in-right mr-[10px] text-[16px] text-[#4154f1]"></i>
-				<span>Login</span>
-			</a>
-		</li>
-		<!-- End Login Page Nav -->
-
-		<li class="mb-[5px]">
-			<a
-				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="/pages/error-404"
-			>
-				<i class="bi bi-dash-circle mr-[10px] text-[16px] text-[#4154f1]"></i>
-				<span>Error 404</span>
-			</a>
-		</li>
-		<!-- End Error 404 Page Nav -->
-
-		<li class="mb-[5px]">
-			<a
-				class="flex items-center rounded-[4px] bg-[#f6f9ff] px-[15px] py-[10px] text-[15px] font-semibold text-[#4154f1]"
-				href="/pages/blank"
-			>
-				<i class="bi bi-file-earmark mr-[10px] text-[16px] text-[#4154f1]"></i>
-				<span>Blank</span>
-			</a>
-		</li>
-		<!-- End Blank Page Nav -->
+			{/if}
+		{/each}
 	</ul>
 </aside>
 
@@ -544,5 +400,5 @@
 	class="fixed bottom-[15px] right-[15px] z-[99999] flex size-[40px] items-center justify-center rounded-[4px] bg-[#4154f1] transition-all duration-[.4s]"
 	aria-label=" "
 >
-	<i class="bi bi-arrow-up-short text-sm leading-[0] text-white"></i>
+	<i class="bi bi-arrow-up-short text-2xl leading-[0] text-white"></i>
 </button>
