@@ -5,7 +5,8 @@ export default {
 	theme: {
 		extend: {
 			content: {
-				empty: '""'
+				empty: '""',
+				divider: '"/"'
 			}
 		}
 	},

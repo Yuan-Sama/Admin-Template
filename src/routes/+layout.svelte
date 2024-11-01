@@ -397,7 +397,7 @@
 </footer>
 
 <button
-	class="fixed bottom-[15px] right-[15px] z-[99999] flex size-[40px] items-center justify-center rounded-[4px] bg-[#4154f1] transition-all duration-[.4s]"
+	class="fixed bottom-[15px] right-[15px] z-[99999] hidden size-[40px] items-center justify-center rounded-[4px] bg-[#4154f1] transition-all duration-[.4s]"
 	aria-label=" "
 >
 	<i class="bi bi-arrow-up-short text-2xl leading-[0] text-white"></i>
